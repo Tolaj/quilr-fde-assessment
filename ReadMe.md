@@ -49,3 +49,23 @@ python task3-llm-streaming/gateway.py
 python task3-llm-streaming/test_gateway.py 
 ```
 
+## Task 4: Rate-Limiting & Model Fallback Router
+
+Async LLM gateway router with token-aware sliding window rate limiter and automatic model failover.
+
+### Design
+- Sliding window rate limiter (50,000 tokens/min per API key) persisted in SQLite
+- Primary model 429 or 3s timeout, automatic failover to secondary
+- Standardized error payloads, no leaked stack traces
+
+### Components
+- `router.py` — async Quart gateway with rate limiting and fallback
+- `rate_limiter.py` — sliding window token tracker using aiosqlite
+- `server.py` — mock primary (429s + slow responses) and secondary endpoints
+
+### Run
+```bash
+pip install quart httpx aiosqlite
+python task4-rate-limiter/server.py
+cd task4-rate-limiter && python router.py
+python task4-rate-limiter/test_router.py
