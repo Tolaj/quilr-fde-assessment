@@ -10,3 +10,20 @@ MCP server over stdio transport with two tools and validation using Pydantic.
 ```bash
 uv pip install mcp pydantic
 python task1-mcp-server/server.py
+```
+
+## Task 2: MCP Security Gateway Proxy
+
+HTTP/JSON-RPC reverse proxy with Bearer token auth and role-based tool filtering.
+
+### Components
+- `gateway.py` — proxy that inspects tokens and filters `admin_` tools
+- `server.py` — downstream mock MCP server for testing
+
+### Run
+```bash
+pip install flask httpx pyjwt
+python task2-mcp-gateway/server.py
+python task2-mcp-gateway/gateway.py    
+python task2-mcp-gateway/test_gateway.py
+```
