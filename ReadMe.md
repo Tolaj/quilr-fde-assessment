@@ -27,3 +27,25 @@ python task2-mcp-gateway/server.py
 python task2-mcp-gateway/gateway.py    
 python task2-mcp-gateway/test_gateway.py
 ```
+
+## Task 3: LLM Gateway Streaming Guardrail (PII Redaction)
+
+Async streaming proxy that redacts PII (emails, SSNs, credit cards) from LLM responses in real time.
+
+### Design
+- Word-boundary buffer split ensures cross-chunk PII is never cut mid-pattern
+- Compiled regex on small chunks, not full response
+- Buffer flushes frequently at word boundaries — never accumulates full response
+
+### Components
+- `gateway.py` — async Quart proxy with PII redaction
+- `server.py` — mock LLM that streams text containing split PII
+
+### Run
+```bash
+pip install flask quart httpx
+python task3-llm-streaming/server.py
+python task3-llm-streaming/gateway.py
+python task3-llm-streaming/test_gateway.py 
+```
+
