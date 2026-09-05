@@ -22,7 +22,7 @@ HTTP/JSON-RPC reverse proxy with Bearer token auth and role-based tool filtering
 
 ### Run
 ```bash
-pip install flask httpx pyjwt
+uv pip install flask httpx pyjwt
 python task2-mcp-gateway/server.py
 python task2-mcp-gateway/gateway.py    
 python task2-mcp-gateway/test_gateway.py
@@ -43,7 +43,7 @@ Async streaming proxy that redacts PII (emails, SSNs, credit cards) from LLM res
 
 ### Run
 ```bash
-pip install flask quart httpx
+uv pip install flask quart httpx
 python task3-llm-streaming/server.py
 python task3-llm-streaming/gateway.py
 python task3-llm-streaming/test_gateway.py 
@@ -65,7 +65,8 @@ Async LLM gateway router with token-aware sliding window rate limiter and automa
 
 ### Run
 ```bash
-pip install quart httpx aiosqlite
+uv pip install quart httpx aiosqlite
 python task4-rate-limiter/server.py
-cd task4-rate-limiter && python router.py
+python task4-rate-limiter/router.py
 python task4-rate-limiter/test_router.py
+```
